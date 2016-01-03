@@ -38,6 +38,6 @@ namespace Openchain.Infrastructure
         /// </summary>
         /// <param name="anchor">The anchor to commit.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        Task CommitAnchor(LedgerAnchor anchor);
+        Task CommitAnchor(LedgerAnchor anchor, LedgerAnchorProof proof);
     }
 }

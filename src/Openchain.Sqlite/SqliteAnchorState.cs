@@ -62,7 +62,7 @@ namespace Openchain.Sqlite
         /// </summary>
         /// <param name="anchor">The anchor to commit.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        public async Task CommitAnchor(LedgerAnchor anchor)
+        public async Task CommitAnchor(LedgerAnchor anchor, LedgerAnchorProof proof)
         {
             await ExecuteAsync(@"
                     INSERT INTO Anchors

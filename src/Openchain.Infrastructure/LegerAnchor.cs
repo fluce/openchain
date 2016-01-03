@@ -41,4 +41,19 @@ namespace Openchain.Infrastructure
         /// </summary>
         public long TransactionCount { get; }
     }
+
+    public class LedgerAnchorProof
+    {
+        public LedgerAnchorProof(ByteString position, string providerId, string partyId, ByteString proof)
+        {
+            Position = position;
+            ProviderId = providerId;
+            PartyId = partyId;
+            Proof = proof;
+        }
+        public ByteString Position { get; }
+        public string ProviderId { get; }
+        public string PartyId { get; }
+        public ByteString Proof { get; }
+    }
 }

@@ -35,6 +35,7 @@
 
   "anchoring": {
     "provider": "Blockchain",
+    "party_id":  "TestNet",
     // The key used to publish anchors in the Blockchain
     //"key": "",
     "bitcoin_api_url": "https://testnet.api.coinprism.com/v1/",

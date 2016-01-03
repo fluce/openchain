@@ -29,6 +29,14 @@ namespace Openchain.MongoDb
         public byte[] FullLedgerHash { get; set; }
         public long TransactionCount { get; set; }
         public BsonTimestamp Timestamp { get; set; } = new BsonTimestamp(0);
+        public List<MongoDbAnchorStateProofRecord> Proofs { get; set; }
+    }
+
+    public class MongoDbAnchorStateProofRecord
+    {
+        public string ProviderId { get; set; }
+        public string PartyId { get; set; }
+        public byte[] Proof { get; set; }
     }
 
     /// <summary>
@@ -73,13 +81,14 @@ namespace Openchain.MongoDb
         /// </summary>
         /// <param name="anchor">The anchor to commit.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        public async Task CommitAnchor(LedgerAnchor anchor)
+        public async Task CommitAnchor(LedgerAnchor anchor, LedgerAnchorProof proof)
         {
             await AnchorStateCollection.InsertOneAsync(new MongoDbAnchorStateRecord
             {
                 Position = anchor.Position.ToByteArray(),
                 FullLedgerHash = anchor.FullStoreHash.ToByteArray(),
-                TransactionCount = anchor.TransactionCount
+                TransactionCount = anchor.TransactionCount,
+                Proofs=new List<MongoDbAnchorStateProofRecord>() { new MongoDbAnchorStateProofRecord { ProviderId=proof.ProviderId, PartyId=proof.PartyId, Proof=proof.Proof.ToByteArray() } } 
             });
         }
     }

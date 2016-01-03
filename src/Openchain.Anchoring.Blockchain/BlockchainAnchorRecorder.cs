@@ -33,13 +33,17 @@ namespace Openchain.Anchoring.Blockchain
         private readonly Key publishingAddress;
         private readonly Network network;
         private readonly long satoshiFees;
+        private readonly string provider;
+        private readonly string partyId;
 
-        public BlockchainAnchorRecorder(Uri url, Key publishingAddress, Network network, long satoshiFees)
+        public BlockchainAnchorRecorder(Uri url, Key publishingAddress, Network network, long satoshiFees, string provider, string partyId)
         {
             this.url = url;
             this.publishingAddress = publishingAddress;
             this.network = network;
             this.satoshiFees = satoshiFees;
+            this.provider = provider;
+            this.partyId = partyId;
         }
 
         /// <summary>
@@ -78,7 +82,7 @@ namespace Openchain.Anchoring.Blockchain
         /// </summary>
         /// <param name="anchor">The anchor to be recorded.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        public async Task RecordAnchor(LedgerAnchor anchor)
+        public async Task<LedgerAnchorProof> RecordAnchor(LedgerAnchor anchor)
         {
             byte[] anchorPayload =
                 anchorMarker
@@ -115,7 +119,9 @@ namespace Openchain.Anchoring.Blockchain
 
                 ByteString seriazliedTransaction = new ByteString(builder.BuildTransaction(true).ToBytes());
 
-                await SubmitTransaction(seriazliedTransaction);
+                var proof=await SubmitTransaction(seriazliedTransaction);
+
+                return new LedgerAnchorProof(anchor.Position, provider, partyId, proof);
             }
         }
 

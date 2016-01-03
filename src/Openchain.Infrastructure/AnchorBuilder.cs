@@ -49,10 +49,10 @@ namespace Openchain.Infrastructure
                 if (latestAnchor != null)
                 {
                     // Record the anchor
-                    await anchorRecorder.RecordAnchor(latestAnchor);
+                    var proof=await anchorRecorder.RecordAnchor(latestAnchor);
 
                     // Commit the anchor if it has been recorded successfully
-                    await anchorState.CommitAnchor(latestAnchor);
+                    await anchorState.CommitAnchor(latestAnchor, proof);
 
                     return latestAnchor;
                 }

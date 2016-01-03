@@ -29,6 +29,7 @@ namespace Openchain.Anchoring.Blockchain
         private Key key;
         private Network network;
         private long fees;
+        private string partyId;
 
         public string Name { get; } = "Blockchain";
 
@@ -39,7 +40,7 @@ namespace Openchain.Anchoring.Blockchain
                 serviceProvider.GetRequiredService<ILogger>().LogInformation(
                     $"Blockchain anchoring configured to publish at address: {key.PubKey.GetAddress(network).ToString()}");
 
-                return new BlockchainAnchorRecorder(apiUrl, key, network, fees);
+                return new BlockchainAnchorRecorder(apiUrl, key, network, fees, Name, partyId);
             }
             else
             {
@@ -59,6 +60,7 @@ namespace Openchain.Anchoring.Blockchain
 
                 this.apiUrl = new Uri(configuration["bitcoin_api_url"]);
                 this.fees = long.Parse(configuration["fees"]);
+                this.partyId = configuration["party_id"];
             }
 
             return Task.FromResult(0);

@@ -32,6 +32,6 @@ namespace Openchain.Infrastructure
         /// </summary>
         /// <param name="anchor">The anchor to be recorded.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        Task RecordAnchor(LedgerAnchor anchor);
+        Task<LedgerAnchorProof> RecordAnchor(LedgerAnchor anchor);
     }
 }

@@ -36,8 +36,8 @@ namespace Openchain.Sqlite.Tests
         [Fact]
         public async Task GetLastAnchor_Success()
         {
-            await this.anchorBuilder.CommitAnchor(new LedgerAnchor(binaryData[0], binaryData[1], 100));
-            await this.anchorBuilder.CommitAnchor(new LedgerAnchor(binaryData[2], binaryData[3], 101));
+            await this.anchorBuilder.CommitAnchor(new LedgerAnchor(binaryData[0], binaryData[1], 100),new LedgerAnchorProof(binaryData[0],"TestProvider","TestPartyId",ByteString.Parse("DEADBEAF")));
+            await this.anchorBuilder.CommitAnchor(new LedgerAnchor(binaryData[2], binaryData[3], 101), new LedgerAnchorProof(binaryData[2], "TestProvider", "TestPartyId", ByteString.Parse("DEADBEFA")));
 
             LedgerAnchor anchor = await this.anchorBuilder.GetLastAnchor();
 
