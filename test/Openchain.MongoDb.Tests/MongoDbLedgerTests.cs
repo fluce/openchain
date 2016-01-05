@@ -24,6 +24,7 @@ namespace Openchain.MongoDb.Tests
     {
         public MongoDbLedgerTests()
         {
+            var logger = new Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider((x, y) => true, true).CreateLogger("Test");
             var store = new MongoDbLedger(
                             new MongoDbStorageEngineConfiguration
                             {
@@ -33,7 +34,7 @@ namespace Openchain.MongoDb.Tests
                                 ReadRetryCount = 10,
                                 StaleTransactionDelay = TimeSpan.FromMinutes(10),
                                 RunRollbackThread = false
-                            }, null);
+                            }, logger);
             store.RecordCollection.DeleteMany(x=>true);
             store.TransactionCollection.DeleteMany(x => true);
             store.PendingTransactionCollection.DeleteMany(x => true);

@@ -236,6 +236,7 @@ namespace Openchain.MongoDb
 
                 if (trn != null)
                 {
+                    Logger.LogInformation($"Rollbacking transaction {new ByteString(hash)}");
 
                     // revert records values & version
                     foreach (var r in trn.InitialRecords)
@@ -258,6 +259,9 @@ namespace Openchain.MongoDb
 
                     // remove pending transaction
                     await PendingTransactionCollection.DeleteOneAsync(x => x.TransactionHash.Equals(hash));
+
+                    Logger.LogInformation($"Transaction {new ByteString(hash)} rollbacked");
+
                 }
 
             }
@@ -276,11 +280,6 @@ namespace Openchain.MongoDb
                 await RollbackTransaction(t.TransactionHash);
         }
 
-        public async Task<ByteString> GetLastTransaction()
-        {
-            var res = await TransactionCollection.Find(x => true).SortByDescending(x => x.Timestamp).FirstOrDefaultAsync();
-            return res == null ? ByteString.Empty : new ByteString(res.TransactionHash);
-        }
 
         public async Task<IReadOnlyList<Record>> GetRecords(IEnumerable<ByteString> keys)
         {
@@ -317,23 +316,63 @@ namespace Openchain.MongoDb
             return list.AsReadOnly();
         }
 
-        public async Task<IReadOnlyList<ByteString>> GetTransactions(ByteString from)
+        private async Task<MongoDbTransaction> GetLastTransactionInternal()
         {
-            MongoDbTransaction res = null;
-            if (from != null)
-            {
-                var cmpkey = from.ToByteArray();
-                res = await TransactionCollection.Find(x => x.TransactionHash == cmpkey).FirstOrDefaultAsync();
-            }
-            List<MongoDbTransaction> l;
+            // look for potential last transaction
+            var res = await TransactionCollection.Find(x => true)
+                                     .SortByDescending(x => x.Timestamp)
+                                     .FirstOrDefaultAsync();
             if (res == null)
+                return null; 
+
+            // look if a pending transaction
+            var resp = await PendingTransactionCollection.Find(x => true).SortByDescending(x => x.Timestamp).FirstOrDefaultAsync();
+            if (resp == null) // no pending transaction
             {
-                l = await TransactionCollection.Find(x => true).SortBy(x => x.Timestamp).ToListAsync();
+                // return last transaction
+                return res; 
             }
             else
             {
-                BsonTimestamp ts = res.Timestamp;
-                l = await TransactionCollection.Find(x => x.Timestamp > ts).SortBy(x => x.Timestamp).ToListAsync();
+                // else return last transaction no younger than pending transaction
+                res = await TransactionCollection.Find(x => x.Timestamp < resp.Timestamp)
+                                                     .SortByDescending(x => x.Timestamp)
+                                                     .FirstOrDefaultAsync();
+                return res;
+            }
+
+        }
+
+        public async Task<ByteString> GetLastTransaction()
+        {
+            var res = await GetLastTransactionInternal();
+            return res == null ? ByteString.Empty : new ByteString(res.TransactionHash);
+        }
+
+        public async Task<IReadOnlyList<ByteString>> GetTransactions(ByteString from)
+        {
+            // find last transaction to return
+            var resl = await GetLastTransactionInternal();
+            if (resl == null)
+                return new List<ByteString>().AsReadOnly();
+
+            // find first transaction to return
+            MongoDbTransaction resf = null;
+            if (from != null)
+            {
+                var cmpkey = from.ToByteArray();
+                resf = await TransactionCollection.Find(x => x.TransactionHash == cmpkey).FirstOrDefaultAsync();
+            }
+
+            List<MongoDbTransaction> l;
+            if (resf == null)
+            {
+                l = await TransactionCollection.Find(x => x.Timestamp <= resl.Timestamp).SortBy(x => x.Timestamp).ToListAsync();
+            }
+            else
+            {
+                l = await TransactionCollection.Find(x => x.Timestamp > resf.Timestamp && x.Timestamp <= resl.Timestamp)
+                                               .SortBy(x => x.Timestamp).ToListAsync();
             }
 
             return l.Select(x => new ByteString(x.RawData)).ToList().AsReadOnly();
