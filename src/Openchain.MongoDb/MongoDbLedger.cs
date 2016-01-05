@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using System.Text;
+using Microsoft.Extensions.Logging;
 
 namespace Openchain.MongoDb
 {
     public class MongoDbLedger : MongoDbStorageEngine, ILedgerQueries, ILedgerIndexes
     {
-        public MongoDbLedger(string connectionString, string database): base (connectionString, database)
+        public MongoDbLedger(MongoDbStorageEngineConfiguration config, ILogger logger): base(config, logger)
         {
         }
 
@@ -56,5 +57,13 @@ namespace Openchain.MongoDb
             var res = await TransactionCollection.Find(x => x.MutationHash == key).SingleOrDefaultAsync();
             return res == null ? null : new ByteString(res.RawData);
         }
+
+        protected override MongoDbRecord BuildMongoDbRecord(Record rec)
+        {
+            RecordKey key = RecordKey.Parse(rec.Key);
+            var r = new MongoDbRecord { Key = rec.Key.ToByteArray(), KeyS = Encoding.UTF8.GetString(rec.Key.ToByteArray()), Value = rec.Value?.ToByteArray(), Version = rec.Version.ToByteArray(), Path = key.Path.Segments.ToArray(), Type = key.RecordType, Name = key.Name };
+            return r;
+        }
+
     }
 }

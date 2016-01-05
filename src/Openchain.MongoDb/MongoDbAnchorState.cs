@@ -30,6 +30,8 @@ namespace Openchain.MongoDb
         public long TransactionCount { get; set; }
         public BsonTimestamp Timestamp { get; set; } = new BsonTimestamp(0);
         public List<MongoDbAnchorStateProofRecord> Proofs { get; set; }
+        [BsonExtraElements]
+        public BsonDocument Extra { get; set; }
     }
 
     public class MongoDbAnchorStateProofRecord
@@ -37,6 +39,8 @@ namespace Openchain.MongoDb
         public string ProviderId { get; set; }
         public string PartyId { get; set; }
         public byte[] Proof { get; set; }
+        [BsonExtraElements]
+        public BsonDocument Extra { get; set; }
     }
 
     /// <summary>

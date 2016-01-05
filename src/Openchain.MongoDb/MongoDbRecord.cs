@@ -1,6 +1,7 @@
 ﻿using Openchain.Infrastructure;
 using System.Collections.Generic;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 
 namespace Openchain.MongoDb
 {
@@ -48,5 +49,11 @@ namespace Openchain.MongoDb
             get;
             set;
         }
+
+        public byte[] TransactionLock { get; set; }
+
+        [BsonExtraElements]
+        public BsonDocument Extra { get; set; }
+
     }
 }
