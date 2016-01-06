@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Openchain.Infrastructure
@@ -38,6 +39,6 @@ namespace Openchain.Infrastructure
         /// </summary>
         /// <param name="anchor">The anchor to commit.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        Task CommitAnchor(LedgerAnchor anchor, LedgerAnchorProof proof);
+        Task CommitAnchor(LedgerAnchor anchor, IEnumerable<LedgerAnchorProof> proof);
     }
 }

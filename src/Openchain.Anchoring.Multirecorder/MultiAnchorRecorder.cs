@@ -12,27 +12,50 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
+using System;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Openchain.Infrastructure;
+using Org.BouncyCastle.Tsp;
+using System.Security.Cryptography;
+using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
-namespace Openchain.Infrastructure
+namespace Openchain.Anchoring.Multi
 {
     /// <summary>
-    /// Provides functionality for recording a database anchor.
+    /// Records database anchors in a Blockchain.
     /// </summary>
-    public interface IAnchorRecorder
+    public class MultiAnchorRecorder : IAnchorRecorder
     {
+        private ILogger logger;
+        private IAnchorRecorder[] recorders;
+
+        public MultiAnchorRecorder(IAnchorRecorder[] recorders, ILogger logger)
+        {
+            this.logger = logger;
+            this.recorders = recorders;
+        }
+
         /// <summary>
         /// Indicates whether this instance is ready to record a new database anchor.
         /// </summary>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        Task<bool> CanRecordAnchor();
+        public Task<bool> CanRecordAnchor()
+        {
+            return Task.FromResult(recorders.All(x=> { var t = x.CanRecordAnchor(); t.Wait(); return t.Result; }));
+        }
 
         /// <summary>
         /// Records a database anchor.
         /// </summary>
         /// <param name="anchor">The anchor to be recorded.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        Task<List<LedgerAnchorProof>> RecordAnchor(LedgerAnchor anchor);
+        public Task<List<LedgerAnchorProof>> RecordAnchor(LedgerAnchor anchor)
+        {
+            return Task.FromResult(recorders.SelectMany(x => { var t = x.RecordAnchor(anchor); t.Wait(); return t.Result; }).ToList());
+        }
     }
 }

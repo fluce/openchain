@@ -21,6 +21,7 @@ using Openchain.Infrastructure;
 using Org.BouncyCastle.Tsp;
 using System.Security.Cryptography;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace Openchain.Anchoring.Timestamp
 {
@@ -58,7 +59,7 @@ namespace Openchain.Anchoring.Timestamp
         /// </summary>
         /// <param name="anchor">The anchor to be recorded.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        public async Task<LedgerAnchorProof> RecordAnchor(LedgerAnchor anchor)
+        public async Task<List<LedgerAnchorProof>> RecordAnchor(LedgerAnchor anchor)
         {
             byte[] anchorPayload =
                 anchorMarker
@@ -85,7 +86,7 @@ namespace Openchain.Anchoring.Timestamp
                 var e = await resp.Content.ReadAsByteArrayAsync();
                 var tsresp = new TimeStampResponse(e);
                 tsresp.Validate(tsr);
-                return new LedgerAnchorProof(anchor.Position, provider, partyId, new ByteString(tsresp.TimeStampToken.GetEncoded()));                    
+                return new List<LedgerAnchorProof> { new LedgerAnchorProof(anchor.Position, provider, partyId, new ByteString(tsresp.TimeStampToken.GetEncoded())) };                    
             }
         }
     }

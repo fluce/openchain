@@ -20,6 +20,7 @@ using System.Threading.Tasks;
 using NBitcoin;
 using Newtonsoft.Json.Linq;
 using Openchain.Infrastructure;
+using System.Collections.Generic;
 
 namespace Openchain.Anchoring.Blockchain
 {
@@ -82,7 +83,7 @@ namespace Openchain.Anchoring.Blockchain
         /// </summary>
         /// <param name="anchor">The anchor to be recorded.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        public async Task<LedgerAnchorProof> RecordAnchor(LedgerAnchor anchor)
+        public async Task<List<LedgerAnchorProof>> RecordAnchor(LedgerAnchor anchor)
         {
             byte[] anchorPayload =
                 anchorMarker
@@ -121,7 +122,7 @@ namespace Openchain.Anchoring.Blockchain
 
                 var proof=await SubmitTransaction(seriazliedTransaction);
 
-                return new LedgerAnchorProof(anchor.Position, provider, partyId, proof);
+                return new List<LedgerAnchorProof> { new LedgerAnchorProof(anchor.Position, provider, partyId, proof) };
             }
         }
 

@@ -179,10 +179,10 @@ namespace Openchain.Infrastructure.Tests
 
             public Task<bool> CanRecordAnchor() => Task.FromResult(Enabled);
 
-            public Task<LedgerAnchorProof> RecordAnchor(LedgerAnchor anchor)
+            public Task<List<LedgerAnchorProof>> RecordAnchor(LedgerAnchor anchor)
             {
                 Anchors.Add(anchor);
-                return Task.FromResult(new LedgerAnchorProof(anchor.Position,"TestProvider", "TestPartyId", ByteString.Parse("DEADBEAF")));
+                return Task.FromResult(new List<LedgerAnchorProof> { new LedgerAnchorProof(anchor.Position, "TestProvider", "TestPartyId", ByteString.Parse("DEADBEAF")) });
             }
         }
 
@@ -190,7 +190,7 @@ namespace Openchain.Infrastructure.Tests
         {
             public LedgerAnchor LastAnchor { get; set; } = null;
 
-            public Task CommitAnchor(LedgerAnchor anchor, LedgerAnchorProof proof)
+            public Task CommitAnchor(LedgerAnchor anchor, IEnumerable<LedgerAnchorProof> proof)
             {
                 this.LastAnchor = anchor;
                 return Task.FromResult(0);

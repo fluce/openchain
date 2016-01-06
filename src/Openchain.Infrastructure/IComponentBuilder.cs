@@ -44,4 +44,11 @@ namespace Openchain.Infrastructure
         /// <returns>The built object.</returns>
         T Build(IServiceProvider serviceProvider);
     }
+
+    public interface IResolver
+    {
+        Task<Func<IServiceProvider, T>> Create<T>(IServiceProvider serviceProvider, string configurationPath) where T : class;
+    }
+
+
 }

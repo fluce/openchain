@@ -56,4 +56,5 @@ namespace Openchain.Infrastructure
         public string PartyId { get; }
         public ByteString Proof { get; }
     }
+
 }

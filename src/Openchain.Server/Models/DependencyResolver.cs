@@ -106,4 +106,12 @@ namespace Openchain.Server.Models
                 .ToList();
         }
     }
+
+    public class Resolver : IResolver
+    {
+        public Task<Func<IServiceProvider, T>> Create<T>(IServiceProvider serviceProvider, string configurationPath) where T : class
+        {
+            return DependencyResolver<T>.Create(serviceProvider, configurationPath);
+        }
+    }
 }

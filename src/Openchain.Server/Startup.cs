@@ -38,7 +38,6 @@ namespace Openchain.Server
             configuration = new ConfigurationBuilder()
                 .SetBasePath(application.ApplicationBasePath)
                 .AddJsonFile(env.MapPath("App_Data/config.json"))
-                .AddJsonFile(env.MapPath("App_Data/config-secrets.json"))
                 .AddUserSecrets()
                 .AddEnvironmentVariables()
                 .Build();
@@ -72,6 +71,8 @@ namespace Openchain.Server
 
             // CORS Headers
             services.AddCors();
+
+            services.AddSingleton<IResolver>(x => new Resolver());
 
             // Ledger Store
             services.AddScoped<IStorageEngine>(await ConfigurationParser.CreateStorageEngine(services.BuildServiceProvider()));

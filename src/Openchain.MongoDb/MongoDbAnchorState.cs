@@ -85,14 +85,14 @@ namespace Openchain.MongoDb
         /// </summary>
         /// <param name="anchor">The anchor to commit.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        public async Task CommitAnchor(LedgerAnchor anchor, LedgerAnchorProof proof)
+        public async Task CommitAnchor(LedgerAnchor anchor, IEnumerable<LedgerAnchorProof> proofs)
         {
             await AnchorStateCollection.InsertOneAsync(new MongoDbAnchorStateRecord
             {
                 Position = anchor.Position.ToByteArray(),
                 FullLedgerHash = anchor.FullStoreHash.ToByteArray(),
                 TransactionCount = anchor.TransactionCount,
-                Proofs=new List<MongoDbAnchorStateProofRecord>() { new MongoDbAnchorStateProofRecord { ProviderId=proof.ProviderId, PartyId=proof.PartyId, Proof=proof.Proof.ToByteArray() } } 
+                Proofs = proofs.Select(proof => new MongoDbAnchorStateProofRecord { ProviderId = proof.ProviderId, PartyId = proof.PartyId, Proof = proof.Proof.ToByteArray() }).ToList()
             });
         }
     }
