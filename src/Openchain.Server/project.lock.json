@@ -1028,6 +1028,25 @@
           "System.Net.Http": "4.0.1-beta-23516"
         }
       },
+      "Openchain.Anchoring.Multirecorder/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "System.Net.Http": "4.0.1-beta-23516"
+        }
+      },
+      "Openchain.Anchoring.Timestamp/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "Portable.BouncyCastle": "1.8.0",
+          "System.Net.Http": "4.0.1-beta-23516"
+        }
+      },
       "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
@@ -3079,6 +3098,31 @@
           "System.Collections"
         ]
       },
+      "Openchain.Anchoring.Multirecorder/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "System.Net.Http": "4.0.1-beta-23516"
+        },
+        "frameworkAssemblies": [
+          "System.Collections"
+        ]
+      },
+      "Openchain.Anchoring.Timestamp/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "Portable.BouncyCastle": "1.8.0",
+          "System.Net.Http": "4.0.1-beta-23516"
+        },
+        "frameworkAssemblies": [
+          "System.Collections"
+        ]
+      },
       "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
@@ -4245,6 +4289,25 @@
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
           "NBitcoin": "2.1.5.9",
           "Openchain.Infrastructure": "0.5.0-rc1",
+          "System.Net.Http": "4.0.1-beta-23516"
+        }
+      },
+      "Openchain.Anchoring.Multirecorder/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "System.Net.Http": "4.0.1-beta-23516"
+        }
+      },
+      "Openchain.Anchoring.Timestamp/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "Portable.BouncyCastle": "1.8.0",
           "System.Net.Http": "4.0.1-beta-23516"
         }
       },
@@ -6720,6 +6783,25 @@
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
           "NBitcoin": "2.1.5.9",
           "Openchain.Infrastructure": "0.5.0-rc1",
+          "System.Net.Http": "4.0.1-beta-23516"
+        }
+      },
+      "Openchain.Anchoring.Multirecorder/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "System.Net.Http": "4.0.1-beta-23516"
+        }
+      },
+      "Openchain.Anchoring.Timestamp/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "Portable.BouncyCastle": "1.8.0",
           "System.Net.Http": "4.0.1-beta-23516"
         }
       },
@@ -9262,6 +9344,31 @@
           "System.Collections"
         ]
       },
+      "Openchain.Anchoring.Multirecorder/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "System.Net.Http": "4.0.1-beta-23516"
+        },
+        "frameworkAssemblies": [
+          "System.Collections"
+        ]
+      },
+      "Openchain.Anchoring.Timestamp/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "Portable.BouncyCastle": "1.8.0",
+          "System.Net.Http": "4.0.1-beta-23516"
+        },
+        "frameworkAssemblies": [
+          "System.Collections"
+        ]
+      },
       "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
@@ -10501,6 +10608,31 @@
           "System.Collections"
         ]
       },
+      "Openchain.Anchoring.Multirecorder/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "System.Net.Http": "4.0.1-beta-23516"
+        },
+        "frameworkAssemblies": [
+          "System.Collections"
+        ]
+      },
+      "Openchain.Anchoring.Timestamp/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "Portable.BouncyCastle": "1.8.0",
+          "System.Net.Http": "4.0.1-beta-23516"
+        },
+        "frameworkAssemblies": [
+          "System.Collections"
+        ]
+      },
       "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
@@ -10653,6 +10785,14 @@
     "Openchain.Anchoring.Blockchain/0.5.0-rc1": {
       "type": "project",
       "path": "../Openchain.Anchoring.Blockchain/project.json"
+    },
+    "Openchain.Anchoring.Multirecorder/0.5.0-rc1": {
+      "type": "project",
+      "path": "../Openchain.Anchoring.Multirecorder/project.json"
+    },
+    "Openchain.Anchoring.Timestamp/0.5.0-rc1": {
+      "type": "project",
+      "path": "../Openchain.Anchoring.Timestamp/project.json"
     },
     "Openchain.Infrastructure/0.5.0-rc1": {
       "type": "project",
@@ -15236,7 +15376,9 @@
       "Openchain.Infrastructure >= 0.5.0-rc1-*",
       "Openchain.Anchoring.Blockchain >= 0.5.0-rc1-*",
       "Openchain.Sqlite >= 0.5.0-rc1-*",
-      "Openchain.Validation.PermissionBased >= 0.5.0-rc1-*"
+      "Openchain.Validation.PermissionBased >= 0.5.0-rc1-*",
+      "Openchain.Anchoring.Timestamp >= 0.5.0-rc1-*",
+      "Openchain.Anchoring.Multirecorder >= 0.5.0-rc1-*"
     ],
     "DNXCore,Version=v5.0": [
       "System.Runtime.Serialization.Primitives >= 4.0.11-beta-23516",

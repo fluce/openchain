@@ -31,7 +31,9 @@
     "Openchain.Infrastructure": "0.5.0-rc1-*",
     "Openchain.Anchoring.Blockchain": "0.5.0-rc1-*",
     "Openchain.Sqlite": "0.5.0-rc1-*",
-    "Openchain.Validation.PermissionBased": "0.5.0-rc1-*"
+    "Openchain.Validation.PermissionBased": "0.5.0-rc1-*",
+    "Openchain.Anchoring.Timestamp": "0.5.0-rc1-*",
+    "Openchain.Anchoring.Multirecorder": "0.5.0-rc1-*"
   },
 
   "commands": {

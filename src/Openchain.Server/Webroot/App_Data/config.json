@@ -34,13 +34,23 @@
   // },
 
   "anchoring": {
-    "provider": "Blockchain",
-    "party_id":  "TestNet",
-    // The key used to publish anchors in the Blockchain
-    //"key": "",
-    "bitcoin_api_url": "https://testnet.api.coinprism.com/v1/",
-    "network_byte": 111,
-    "fees": 5000,
+    "provider": "Multi",
+    "recorders": [
+      {
+        "provider": "Timestamp",
+        "party_id": "IAIK TU Graz",
+        "tsp_url": "http://tsp.iaik.tugraz.at/tsp/TspRequest"
+      },
+      {
+        "provider": "Blockchain",
+        "party_id": "TestNet",
+        // The key used to publish anchors in the Blockchain
+        //"key": "",
+        "bitcoin_api_url": "https://testnet.api.coinprism.com/v1/",
+        "network_byte": 111,
+        "fees": 5000
+      }
+    ],
     "storage": {
       //"provider": "SQLite",
       //"path": "anchors.db"
@@ -50,5 +60,5 @@
       //"connection_string": "mongodb://localhost",
       //"database": "openchain"
     }
-  }
+    }
 }
