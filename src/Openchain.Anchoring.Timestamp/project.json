@@ -1,0 +1,33 @@
+﻿{
+  "version": "0.5.0-rc1-*",
+  "description": "TSP-based anchoring for Openchain.",
+  "authors": [ "Frédéric Luce" ],
+  "owners": [ "Frédéric Luce" ],
+  "projectUrl": "https://www.openchain.org/",
+  "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0",
+  "iconUrl": "https://www.openchain.org/package.png",
+  "copyright": "Copyright \u00A9 2016",
+
+  "compilationOptions": {
+    "allowUnsafe": false,
+    "warningsAsErrors": true
+  },
+
+  "dependencies": {
+    "System.Net.Http": "4.0.1-beta-23516",
+    "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+    "Portable.BouncyCastle": "1.8.0",
+    "Openchain.Infrastructure": "0.5.0-rc1-*"
+  },
+
+  "frameworks": {
+    "dotnet5.4": { },
+
+    "net451": {
+      "frameworkAssemblies": {
+        "System.Collections": "4.0.0.0"
+      }
+    }
+  }
+
+}
